@@ -32,7 +32,9 @@ module Transbank
 
         request_headers = {'Content-Type' => 'application/json'}.merge(headers || {})
         request = Net::HTTP::Put.new(uri.path, request_headers)
-        request.body = JSON.generate(body)
+        if body
+          request.body = JSON.generate(body)
+        end
         http.request(request)
       end
 
